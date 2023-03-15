@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% from 'macros/form_fields.html' import render_fields %}
 
-</body>
-</html>
+{% block title %}
+  <h1>Добавление операции</h1>
+{% endblock %}
+
+{% block body %}
+  {% if error %}
+      <div class="alert alert-danger" role="alert">
+        {{ error }}
+      </div>
+    {% endif %}
+<form method="POST" class="container">
+  {{ form.csrf_token() }}
+  {% for fields in ['name', 'operators', 'body',
+                    'data',] %}
+    {{ render_fields(form[fields]) }}
+  {% endfor %}
+  <div>
+    {{ form.submit(class="btn btn-primary btn-lg") }}
+  </div>
+</form>
+{% endblock %}

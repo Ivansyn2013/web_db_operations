@@ -6,12 +6,14 @@ from flask_migrate import Migrate
 from models.init_dba import db
 from commands import my_cli_commands
 from views.auth import login_manager, auth_app
+from views.operations import operations_app
 
 app = Flask(__name__)
 
 #blueprints
 app.register_blueprint(my_cli_commands)
 app.register_blueprint(auth_app, url_prefix='/auth')
+app.register_blueprint(operations_app, url_prefix='/operations')
 #settings
 app.config.from_object(DeveloperPostgresConfig)
 #imports
