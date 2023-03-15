@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    env_file:
+      - ".env"
+    ports:
+      - "8080:5001"
+    depends_on:
+      - pg
+  pg:
+    image: postgres:12
+    env_file:
+    - ".env"
+    ports:
+      - "5433:5432"
+
