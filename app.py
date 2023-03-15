@@ -5,11 +5,13 @@ from config.config import DeveloperPostgresConfig
 from flask_migrate import Migrate
 from models.init_dba import db
 from commands import my_cli_commands
+from views.auth import login_manager, auth_app
 
 app = Flask(__name__)
 
 #blueprints
 app.register_blueprint(my_cli_commands)
+app.register_blueprint(auth_app, url_prefix='/auth')
 #settings
 app.config.from_object(DeveloperPostgresConfig)
 #imports
@@ -20,6 +22,7 @@ db.init_app(app)
 
 migrate = Migrate()
 migrate.init_app(app, db, compare_type=True)
+#logger
 
 
 @app.route('/')

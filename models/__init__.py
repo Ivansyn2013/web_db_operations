@@ -1,6 +1,7 @@
 from sqlalchemy import Column,DateTime
-from init_dba import db
+from models.init_dba import db
 
-__all__= [
+
+__all__ = [
     'db'
 ]

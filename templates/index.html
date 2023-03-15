@@ -1,10 +1,11 @@
+{% extends 'base.html' %}
 {% block title %}
   Главная
 {% endblock %}
 
 {% block body %}
   <div class="container">
-    {% if current_user.authenticated %}
+    {% if current_user.is_authenticated %}
       <h2>Данный сайт предназначен для ведения базы данных операций
         отделения</h2>
     {% else %}

@@ -1,1 +1,1 @@
-from security import flask_bcrypt
+from config.security import flask_bcrypt

@@ -2,7 +2,7 @@ import uuid
 
 import flask_bcrypt
 from flask_login import UserMixin
-from init_dba import db
+from models.init_dba import db
 from datetime import datetime
 
 class User(db.Model, UserMixin):
@@ -24,8 +24,8 @@ class User(db.Model, UserMixin):
 class Operation(db.Model):
     id = db.Column(db.String(300), primary_key=True, default=uuid.uuid4())
     name = db.Column(db.String(200), nullable=False, unique=False)
-    data = db.Column(db.Datetime, nullable=False)
+    data = db.Column(db.DateTime, nullable=False)
     operators = db.Column(db.ARRAY(db.String(100)), nullable=False)
-    body = db.Culumn(db.Text, nullable=False)
+    body = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)

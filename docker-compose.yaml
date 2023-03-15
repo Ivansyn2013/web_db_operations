@@ -9,8 +9,8 @@ services:
     ports:
       - "8080:5001"
     depends_on:
-      - pg
-  pg:
+      - pg_operation
+  pg_operation:
     image: postgres:12
     env_file:
     - ".env"
