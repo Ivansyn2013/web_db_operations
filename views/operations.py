@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from models.models import Operation
+from models.models import Operation, Nurse, Surgeon
 from flask_login import login_required
 from forms.operations import CreateOperationForm
 from models.init_dba import db
@@ -14,21 +14,25 @@ def operations_list():
     return render_template('operations/list.html', operations=operations)
 
 
-@operations_app.route('/create', methods=['GET'], endpoint='create')
+@operations_app.route('/create/', methods=['GET'], endpoint='create')
 @login_required
 def operations_create():
     form = CreateOperationForm(request.form)
+
     return render_template('operations/create.html', form=form)
 
-@operations_app.route('/create', methods=['POST'], endpoint='create_db')
+@operations_app.route('/create/', methods=['POST'], endpoint='create_db')
 @login_required
 def operarions_create():
     form = CreateOperationForm(request.form)
     if form.validate_on_submit():
         operation = Operation(name=form.name.data,
-                              operators=form.operators.data,
+                              surgeons=[Surgeon(last_name=form.operators.data)],
                               body=form.body.data,
                               data=form.data.data,
+                              start_time=form.start_time.data,
+                              end_time=form.end_time.data,
+                              nurse=[Nurse(last_name=form.nurse.data)],
                               )
         try:
             db.session.add(operation)
@@ -37,4 +41,4 @@ def operarions_create():
             print(f'Ошибка операций бд {error}')
         return redirect(url_for('operations_app.list'))
     else:
-        return render_template(operations_create, error='error db')
+        return render_template('operations/create.html', error='error db')

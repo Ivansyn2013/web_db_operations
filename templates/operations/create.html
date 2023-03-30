@@ -13,9 +13,9 @@
     {% endif %}
 <form method="POST" class="container">
   {{ form.csrf_token() }}
-  {% for fields in ['name', 'operators', 'body',
-                    'data',] %}
-    {{ render_fields(form[fields]) }}
+  {% for field in form if field.name not in ['csrf_token',
+      'submit'] %}
+    {{ render_fields(field) }}
   {% endfor %}
   <div>
     {{ form.submit(class="btn btn-primary btn-lg") }}

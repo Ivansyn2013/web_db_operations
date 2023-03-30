@@ -24,8 +24,9 @@ def create_user():
     tmp1 = input('Введи пароль пользователя:\n')
     if tmp1 == tmp:
         admin.password = tmp
-        db.session.add(admin)
+
         try:
+            db.session.add(admin)
             db.session.commit()
             print(
                 Fore.GREEN + f'Создан юзер в бд {admin.name}, {admin.id}' + Fore.RESET)
