@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% from 'macros/form_fields.html' import render_fields %}
+{% from 'macros/form_create_operation.html' import render_date_fields %}
 
 {% block title %}
   <h1>Добавление операции</h1>
@@ -13,12 +14,23 @@
     {% endif %}
 <form method="POST" class="container">
   {{ form.csrf_token() }}
-  {% for field in form if field.name not in ['csrf_token',
-      'submit'] %}
-    {{ render_fields(field) }}
-  {% endfor %}
+  <div class="row">
+    {{ render_fields(form['name']) }}
+  </div>
+  <div class="row">
+    {% for field_name in ['data','start_time', 'end_time'] %}
+      {{ render_date_fields(form[field_name]) }}
+    {% endfor %}
+  </div>
+  <div class="row">
+    {{ render_date_fields(form['operators']) }}
+    {{ render_date_fields(form['nurse']) }}
+  </div>
   <div>
-    {{ form.submit(class="btn btn-primary btn-lg") }}
+    {{ render_fields(form['body']) }}
+  </div>
+  <div class="row">
+    {{ form.submit(class="btn btn-primary my-3") }}
   </div>
 </form>
 {% endblock %}

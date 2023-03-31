@@ -1,0 +1,19 @@
+{% macro render_date_fields(field) %}
+
+    <div class="col-sm-3 col-md-3 col-lg-3">
+      {{ field.label }}
+      {{ field(class="form-control" +  (" is-invalid" if field
+            .errors
+            else
+            ""))|safe }}
+    </div>
+    {% if field.errors %}
+          {% for error in field.errors %}
+          <div class="invalid-feedback">
+            {{ error }}
+          </div>
+          {% endfor %}
+        {% endif %}
+
+
+{% endmacro %}

@@ -1,5 +1,4 @@
 {% macro render_fields(field) %}
-  <div class="row my-3">
     {{ field.label(class="col-sm-4 col-md-3 col-lg-2 col-form-label") }}
       <div class="col-sm-8 col-md-6">
         {{ field(class="form-control" + (" is-invalid" if field.errors else ""))|safe }}
@@ -10,7 +9,6 @@
           </div>
           {% endfor %}
         {% endif %}
-      </div>
 
   </div>
 {% endmacro %}

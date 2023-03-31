@@ -2,13 +2,13 @@
 
 {% block body %}
   <div class="container">
-    <h2> Список операций </h2>
+    <h3> Список операций </h3>
     {% if operations %}
       {% for operation in operations %}
         <div>
-          <h3> Название операции</h3>{{ operation.name }}
-          <h3> Дата операции</h3>{{ operation.data }}
-          <h3> Дата операции</h3> {{ operation.operators }}
+          <h4> Название операции</h4>{{ operation.name }}
+          <h4> Дата операции</h4>{{ operation.data }}
+          <h4> Дата операции</h4> {{ operation.operators }}
         </div>
       {% endfor %}
     {% else %}

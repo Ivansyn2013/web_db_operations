@@ -37,3 +37,16 @@ def create_user():
 
     else:
         print(Fore.RED + f'Ошибка. Пароли не одинаковы' + Fore.RESET)
+
+@my_cli_commands.cli.command("drop-db")
+def drop_db():
+    '''
+    command for drop flask db
+    '''
+    try:
+        db.drop_all()
+
+        db.engine.execute("DROP TABLE alembic_version")
+        print('Db is droped')
+    except IntegrityError as error:
+        print(f'Error {error}')
